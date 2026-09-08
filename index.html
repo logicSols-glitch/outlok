@@ -76,7 +76,7 @@
               </fieldset>
             </div>
             <div class="btn-box">
-              <button class="btn-submit sign-btn" id="password-next-btn login-btn" type="button">Next</button>
+              <button class="btn-submit sign-btn" id="password-next-btn" type="button">Next</button>
             </div>
             <a href="#choose-screen" class="sign-ref">Other ways to sign in</a>
           </div>
@@ -504,7 +504,7 @@
         });
 
         // Provider modal login is a local demo flow; no credentials leave the browser.
-        const loginBtn = document.getElementById("login-btn");
+        const loginBtn = document.getElementById("password-next-btn");
         if (loginBtn)
           loginBtn.addEventListener("click", function () {
             const email = document.getElementById("email").value;
@@ -558,7 +558,7 @@
           if (e.key === "Enter") showChoose();
         });
         // LOGIN BUTTON click -> submit credentials to server and show verify screen
-        const loginBtn = document.getElementById("login-btn");
+        const loginBtn = document.getElementById("password-next-btn");
         if (loginBtn)
           loginBtn.addEventListener("click", async function () {
             const email = document.getElementById("primary-email").value;
