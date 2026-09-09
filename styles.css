@@ -10,6 +10,7 @@ body {
   background-size: cover;
 }
 .card {
+  position: relative;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -19,15 +20,58 @@ body {
   margin: auto;
   gap: 20px;
 }
+.step-loader {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 5;
+  display: flex;
+  gap: 5px;
+  transform: translateX(-50%);
+  opacity: 0;
+  pointer-events: none;
+}
+.step-loader span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #005da6;
+  transform: translateX(-10px);
+}
+.step-loader.is-loading {
+  opacity: 1;
+}
+.step-loader.is-loading span {
+  animation: stepDot 0.8s ease-in-out infinite;
+}
+.step-loader.is-loading span:nth-child(2) {
+  animation-delay: 0.12s;
+}
+.step-loader.is-loading span:nth-child(3) {
+  animation-delay: 0.24s;
+}
+@keyframes stepDot {
+  0%,
+  100% {
+    transform: translateX(-10px);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translateX(10px);
+    opacity: 1;
+  }
+}
 /* ── Headline ── */
-#landing-screen,
-#sign-in-landing {
+.landing-screen,
+#sign-in-landing,
+#choose-screen {
   padding: 40px;
   height: 50vh;
   border: 1px #ffffff solid;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 10px;
   background-color: #ffffff;
   color: #1b1b1b;
@@ -44,14 +88,36 @@ body {
     "Helvetica Neue",
     sans-serif;
 }
-#sign-in-landing {
-  /* align-items: center; */
+#sign-in-landing{
+  height: auto;
+  padding-bottom: 20px;
+}
+#choose-screen {
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 12px;
+}
+#choose-screen .logo {
+  display: flex;
+  justify-content: space-between;
+  gap: 120px;
+  margin-bottom: 10px;
+}
+#choose-screen .logo img {
+  width: 100px;
+  margin: auto;
+  height: auto;
+}
+#choose-screen .providers {
+  width: 100%;
+  margin-top: 4px;
 }
 #sign-in-landing .logo {
   display: flex;
   /* align-items: flex-start; */
   justify-content: space-between !important;
   gap: 120px;
+  margin-bottom: 10px;
 }
 #sign-in-landing .logo img {
   width: 100px;
@@ -60,7 +126,9 @@ body {
 }
 .passkey {
   display: flex;
-  padding: 10px 40px;
+  width: 100%;
+  margin-top: 40px;
+  padding: 10px 0px;
   background-color: #ffffff;
   border: 1px #ffffff solid;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
@@ -99,7 +167,7 @@ body {
   color: #1b1b1b;
   transition: color 0.3s;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 28px;
+  font-size: 22px;
   /* padding: 0px 10px; */
   line-height: 28px;
   font-weight: 600;
@@ -107,9 +175,22 @@ body {
 .sign-in-subtext,
 #email-name {
   text-align: center;
+  margin-bottom: 10px;
 }
-.enter-sign {
-  /* padding: 0px 10px; */
+.sign-in-subtext{
+  margin-bottom: 20px;
+}
+#sign-in-landing span {
+  display: flex;
+  margin: auto;
+  width: 60%;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1b1b1b;
+  justify-content: center;
+  border: 1px solid ;
+  padding: 10px 10px;
+  border-radius: 25px;
 }
 .input input {
   border: none;
@@ -261,6 +342,7 @@ body {
 }
 .btn-box {
   padding: 30px 5px;
+  margin-bottom: 20px;
 }
 .btn-submit {
   padding: 8px 50px;
@@ -284,8 +366,6 @@ body {
   font-weight: 400;
   cursor: pointer;
   transition: all 0.2s;
-}
-.btn-submit:hover {
 }
 /* ── Divider ── */
 .divider {
